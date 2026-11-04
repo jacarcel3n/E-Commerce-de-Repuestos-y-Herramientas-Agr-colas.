@@ -3,608 +3,282 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Tienda en línea de repuestos y herramientas agrícolas para tractores, riego, cosecha y fumigación.">
   <title>AgroRepuestos | Repuestos y herramientas agrícolas</title>
 
   <style>
-    /* ========== 1. VARIABLES Y REINICIO ========== */
-    :root {
-      --verde: #1f3d2b;
-      --verde-claro: #2f5d41;
-      --heno: #e3b023;
-      --heno-oscuro: #b88a0d;
-      --suelo: #3a2e25;
-      --fondo: #f2f4ee;
-      --blanco: #ffffff;
-      --gris: #5b625c;
-      --borde: #d4d9cd;
-      --fuente: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-      --fuente-titulo: "Arial Black", "Segoe UI Black", Impact, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: var(--fuente);
-      background: var(--fondo);
-      color: var(--suelo);
+      font-family: Arial, sans-serif;
+      background-color: #f2f4ee;
+      color: #333333;
       line-height: 1.6;
     }
 
-    a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
-
-    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
-      outline: 3px solid var(--heno);
-      outline-offset: 2px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .contenedor { width: min(1160px, 92%); margin-inline: auto; }
+    ul {
+      list-style: none;
+    }
 
-    h1, h2, h3 { font-family: var(--fuente-titulo); line-height: 1.15; }
+    header {
+      background-color: #1f3d2b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
 
-    /* ========== 2. BOTONES ========== */
+    header h1 {
+      font-size: 2rem;
+    }
+
+    header p {
+      color: #e3b023;
+    }
+
+    nav {
+      background-color: #2f5d41;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      padding: 12px;
+    }
+
+    nav a {
+      color: white;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #e3b023;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      color: #1f3d2b;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #inicio {
+      text-align: center;
+    }
+
+    #inicio h2 {
+      font-size: 2rem;
+    }
+
+    #inicio p {
+      margin-bottom: 20px;
+    }
+
+    button, .boton {
+      background-color: #e3b023;
+      color: #333333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover, .boton:hover {
+      background-color: #b88a0d;
+    }
+
     .boton {
       display: inline-block;
-      padding: 12px 24px;
-      border: 2px solid var(--heno);
-      background: var(--heno);
-      color: var(--suelo);
-      font: 700 1rem var(--fuente);
-      border-radius: 4px;
-      cursor: pointer;
     }
-    .boton:hover { background: var(--heno-oscuro); border-color: var(--heno-oscuro); }
-    .boton--borde { background: transparent; color: var(--blanco); border-color: var(--blanco); }
-    .boton--borde:hover { background: var(--blanco); border-color: var(--blanco); color: var(--verde); }
 
-    /* ========== 3. ENCABEZADO ========== */
-    .aviso {
-      background: var(--suelo);
-      color: var(--blanco);
+    .tarjetas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    article {
+      background-color: white;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      padding: 20px;
+      width: 240px;
       text-align: center;
-      font-size: .9rem;
-      padding: 8px 4%;
     }
 
-    header.encabezado {
-      background: var(--verde);
-      color: var(--blanco);
-      border-bottom: 5px solid var(--heno);
+    article h3 {
+      margin-bottom: 8px;
+      color: #1f3d2b;
     }
 
-    .encabezado__superior {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-block: 18px;
+    .icono {
+      font-size: 3rem;
     }
 
-    .logo { font-family: var(--fuente-titulo); font-size: 1.6rem; }
-    .logo span { color: var(--heno); }
-
-    .buscador { display: flex; flex: 1 1 320px; max-width: 520px; }
-    .buscador input {
-      flex: 1;
-      padding: 11px 14px;
-      border: none;
-      border-radius: 4px 0 0 4px;
-      font: 1rem var(--fuente);
-    }
-    .buscador button {
-      padding: 11px 20px;
-      border: none;
-      background: var(--heno);
-      color: var(--suelo);
-      font: 700 1rem var(--fuente);
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-    }
-    .buscador button:hover { background: var(--heno-oscuro); }
-
-    .acciones { display: flex; gap: 18px; font-weight: 700; }
-    .acciones a:hover { color: var(--heno); }
-
-    nav.menu { background: var(--verde-claro); }
-    nav.menu ul { display: flex; flex-wrap: wrap; gap: 4px 28px; padding-block: 12px; }
-    nav.menu a { font-weight: 700; padding: 4px 0; border-bottom: 3px solid transparent; }
-    nav.menu a:hover { border-bottom-color: var(--heno); }
-
-    /* ========== 4. PORTADA ========== */
-    .portada {
-      background: linear-gradient(135deg, var(--verde) 55%, var(--verde-claro));
-      color: var(--blanco);
-      padding-block: 72px;
-    }
-    .portada .contenedor {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .portada h1 { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 18px; }
-    .portada p { font-size: 1.1rem; max-width: 52ch; margin-bottom: 28px; color: #dfe8dd; }
-    .portada__botones { display: flex; flex-wrap: wrap; gap: 12px; }
-
-    .portada__ficha {
-      background: var(--blanco);
-      color: var(--suelo);
-      border-left: 8px solid var(--heno);
-      border-radius: 6px;
-      padding: 28px;
-    }
-    .portada__ficha h2 { font-size: 1.1rem; margin-bottom: 14px; }
-    .portada__ficha dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
-    .portada__ficha dt { font-weight: 700; color: var(--gris); }
-    .portada__ficha dd { font-family: "Courier New", monospace; font-weight: 700; }
-
-    /* ========== 5. SECCIONES GENERALES ========== */
-    main section { padding-block: 64px; }
-    .titulo-seccion { font-size: 1.9rem; margin-bottom: 8px; }
-    .subtitulo-seccion { color: var(--gris); margin-bottom: 32px; max-width: 60ch; }
-
-    /* ========== 6. CATEGORÍAS ========== */
-    .categorias__lista {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .categoria {
-      background: var(--blanco);
-      border: 2px solid var(--borde);
-      border-radius: 6px;
-      padding: 24px 20px;
-    }
-    .categoria:hover { border-color: var(--verde); }
-    .categoria .icono { font-size: 2.2rem; display: block; margin-bottom: 10px; }
-    .categoria h3 { font-size: 1.05rem; margin-bottom: 6px; }
-    .categoria p { font-size: .92rem; color: var(--gris); }
-
-    /* ========== 7. PRODUCTOS ========== */
-    .productos { background: var(--blanco); border-block: 1px solid var(--borde); }
-
-    .productos__rejilla {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 24px;
+    .precio {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #1f3d2b;
+      margin: 10px 0;
     }
 
-    article.producto {
-      display: flex;
-      flex-direction: column;
-      background: var(--fondo);
-      border: 1px solid var(--borde);
-      border-radius: 6px;
-      overflow: hidden;
+    form {
+      background-color: white;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 450px;
+      margin: 0 auto;
     }
-    article.producto figure {
-      display: grid;
-      place-items: center;
-      height: 150px;
-      font-size: 4rem;
-      background: var(--verde-claro);
-    }
-    article.producto figure.alt { background: var(--suelo); }
-    article.producto figure.alt2 { background: var(--heno-oscuro); }
 
-    .producto__cuerpo { display: flex; flex-direction: column; flex: 1; padding: 18px; }
-    .producto__codigo { font: 700 .8rem "Courier New", monospace; color: var(--gris); }
-    .producto h3 { font-size: 1.05rem; margin: 6px 0; }
-    .producto__compat { font-size: .9rem; color: var(--gris); margin-bottom: 12px; }
-    .producto__etiqueta {
-      align-self: flex-start;
-      background: var(--heno);
-      font-size: .78rem;
-      font-weight: 700;
-      padding: 2px 10px;
-      border-radius: 3px;
-      margin-bottom: 10px;
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 12px;
     }
-    .producto__pie {
-      margin-top: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .precio { font: 900 1.4rem var(--fuente-titulo); color: var(--verde); }
-    .precio del { font: 400 .9rem var(--fuente); color: var(--gris); margin-left: 6px; }
-    .producto__pie .boton { padding: 9px 14px; font-size: .92rem; }
 
-    /* ========== 8. VENTAJAS ========== */
-    .ventajas__lista {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 28px;
-    }
-    .ventaja { border-top: 5px solid var(--heno); padding-top: 14px; }
-    .ventaja h3 { font-size: 1.05rem; margin-bottom: 6px; }
-    .ventaja p { color: var(--gris); font-size: .95rem; }
-
-    /* ========== 9. OFERTA ========== */
-    .oferta { background: var(--suelo); color: var(--blanco); }
-    .oferta .contenedor {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .oferta h2 { font-size: 1.7rem; margin-bottom: 8px; }
-    .oferta p { color: #e6dccf; max-width: 55ch; }
-
-    /* ========== 10. CONTACTO ========== */
-    .contacto .contenedor {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
-    form.formulario {
-      background: var(--blanco);
-      border: 2px solid var(--borde);
-      border-radius: 6px;
-      padding: 26px;
-      display: grid;
-      gap: 14px;
-    }
-    .formulario label { font-weight: 700; display: block; margin-bottom: 4px; }
-    .formulario input, .formulario select, .formulario textarea {
+    input, textarea {
       width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--borde);
+      padding: 8px;
+      border: 1px solid #999999;
       border-radius: 4px;
-      font: 1rem var(--fuente);
-      background: var(--fondo);
+      font-size: 1rem;
     }
-    .formulario textarea { min-height: 100px; resize: vertical; }
 
-    .contacto address { font-style: normal; display: grid; gap: 10px; margin-top: 16px; }
-    .contacto address strong { color: var(--verde); }
-
-    /* ========== 11. PIE DE PÁGINA ========== */
-    footer.pie { background: var(--verde); color: #d7e2d6; padding-top: 48px; }
-    .pie__columnas {
-      display: grid;
-      grid-template-columns: 1.4fr repeat(3, 1fr);
-      gap: 32px;
-      padding-bottom: 36px;
+    form button {
+      margin-top: 15px;
     }
-    .pie h2, .pie h3 { color: var(--blanco); font-size: 1rem; margin-bottom: 12px; }
-    .pie li { margin-bottom: 6px; font-size: .94rem; }
-    .pie a:hover { color: var(--heno); }
-    .pie__legal {
-      border-top: 1px solid var(--verde-claro);
+
+    footer {
+      background-color: #1f3d2b;
+      color: white;
       text-align: center;
-      font-size: .85rem;
-      padding-block: 18px;
-    }
-
-    /* ========== 12. ADAPTABLE A CELULAR ========== */
-    @media (max-width: 800px) {
-      .portada .contenedor,
-      .contacto .contenedor { grid-template-columns: 1fr; }
-      .pie__columnas { grid-template-columns: 1fr 1fr; }
-      .portada { padding-block: 48px; }
-    }
-    @media (max-width: 480px) {
-      .pie__columnas { grid-template-columns: 1fr; }
+      padding: 20px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Aviso superior -->
-  <aside class="aviso">Envío gratis en compras desde $120 a todo el país</aside>
-
-  <!-- ENCABEZADO -->
-  <header class="encabezado">
-    <div class="contenedor encabezado__superior">
-      <a href="#inicio" class="logo">Agro<span>Repuestos</span></a>
-
-      <form class="buscador" action="#" role="search">
-        <label for="buscar" class="sr-only" style="position:absolute;left:-9999px;">Buscar productos</label>
-        <input type="search" id="buscar" name="buscar" placeholder="Busca por pieza, marca o código">
-        <button type="submit">Buscar</button>
-      </form>
-
-      <div class="acciones">
-        <a href="#contacto">Mi cuenta</a>
-        <a href="#productos">Carrito (0)</a>
-      </div>
-    </div>
-
-    <!-- NAVEGACIÓN PRINCIPAL -->
-    <nav class="menu" aria-label="Navegación principal">
-      <div class="contenedor">
-        <ul>
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#categorias">Categorías</a></li>
-          <li><a href="#productos">Productos</a></li>
-          <li><a href="#ventajas">Por qué elegirnos</a></li>
-          <li><a href="#oferta">Ofertas</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </div>
-    </nav>
+  <header>
+    <h1>AgroRepuestos</h1>
+    <p>Repuestos y herramientas para el campo</p>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main id="inicio">
+  <nav>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#categorias">Categorías</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
 
-    <!-- Portada -->
-    <section class="portada" aria-labelledby="titulo-portada">
-      <div class="contenedor">
-        <div>
-          <h1 id="titulo-portada">La pieza correcta, antes de que se pierda la cosecha</h1>
-          <p>Repuestos para tractores, bombas de riego, motoguadañas y fumigadoras, además de herramientas de campo. Compra por código de pieza o por modelo de tu máquina.</p>
-          <div class="portada__botones">
-            <a href="#productos" class="boton">Ver repuestos</a>
-            <a href="#oferta" class="boton boton--borde">Ver ofertas</a>
-          </div>
-        </div>
+  <main>
 
-        <aside class="portada__ficha" aria-labelledby="titulo-ficha">
-          <h2 id="titulo-ficha">Ejemplo de ficha de pieza</h2>
-          <dl>
-            <dt>Código</dt><dd>FH-2041-T</dd>
-            <dt>Pieza</dt><dd>Filtro hidráulico</dd>
-            <dt>Equipo</dt><dd>Tractor 75 HP</dd>
-            <dt>Stock</dt><dd>En bodega</dd>
-          </dl>
-        </aside>
+    <section id="inicio">
+      <h2>La pieza correcta para tu cosecha</h2>
+      <p>Repuestos para tractores, bombas de riego y fumigadoras, además de herramientas de campo.</p>
+      <a href="#productos" class="boton">Ver productos</a>
+    </section>
+
+    <section id="categorias">
+      <h2>Categorías</h2>
+      <div class="tarjetas">
+        <article>
+          <p class="icono">🚜</p>
+          <h3>Repuestos de tractor</h3>
+          <p>Filtros, correas y mangueras.</p>
+        </article>
+        <article>
+          <p class="icono">💧</p>
+          <h3>Riego</h3>
+          <p>Bombas, aspersores y válvulas.</p>
+        </article>
+        <article>
+          <p class="icono">🔧</p>
+          <h3>Herramientas</h3>
+          <p>Palas, machetes y tijeras de podar.</p>
+        </article>
+        <article>
+          <p class="icono">🧴</p>
+          <h3>Fumigación</h3>
+          <p>Bombas de espalda y boquillas.</p>
+        </article>
       </div>
     </section>
 
-    <!-- Categorías -->
-    <section id="categorias" class="categorias" aria-labelledby="titulo-categorias">
-      <div class="contenedor">
-        <h2 id="titulo-categorias" class="titulo-seccion">Compra por categoría</h2>
-        <p class="subtitulo-seccion">Encuentra lo que necesitas según el trabajo que haces en tu finca.</p>
-
-        <div class="categorias__lista">
-          <article class="categoria">
-            <span class="icono" aria-hidden="true">🚜</span>
-            <h3>Repuestos de tractor</h3>
-            <p>Filtros, correas, embragues y mangueras.</p>
-          </article>
-          <article class="categoria">
-            <span class="icono" aria-hidden="true">💧</span>
-            <h3>Riego y bombeo</h3>
-            <p>Bombas, aspersores, válvulas y tuberías.</p>
-          </article>
-          <article class="categoria">
-            <span class="icono" aria-hidden="true">🔧</span>
-            <h3>Herramientas manuales</h3>
-            <p>Palas, machetes, tijeras de podar y azadones.</p>
-          </article>
-          <article class="categoria">
-            <span class="icono" aria-hidden="true">🌾</span>
-            <h3>Cosecha</h3>
-            <p>Hoces, cuchillas, mallas y canastos.</p>
-          </article>
-          <article class="categoria">
-            <span class="icono" aria-hidden="true">🧴</span>
-            <h3>Fumigación</h3>
-            <p>Bombas de espalda, boquillas y sellos.</p>
-          </article>
-        </div>
+    <section id="productos">
+      <h2>Productos destacados</h2>
+      <div class="tarjetas">
+        <article>
+          <p class="icono">⚙️</p>
+          <h3>Filtro hidráulico</h3>
+          <p>Para tractores de 60 a 90 HP.</p>
+          <p class="precio">$24,90</p>
+          <button>Agregar</button>
+        </article>
+        <article>
+          <p class="icono">💧</p>
+          <h3>Bomba de agua</h3>
+          <p>A gasolina de 5,5 HP.</p>
+          <p class="precio">$289,00</p>
+          <button>Agregar</button>
+        </article>
+        <article>
+          <p class="icono">✂️</p>
+          <h3>Tijera de podar</h3>
+          <p>De acero forjado.</p>
+          <p class="precio">$18,50</p>
+          <button>Agregar</button>
+        </article>
+        <article>
+          <p class="icono">🧴</p>
+          <h3>Fumigadora de espalda</h3>
+          <p>Capacidad de 20 litros.</p>
+          <p class="precio">$46,00</p>
+          <button>Agregar</button>
+        </article>
       </div>
     </section>
 
-    <!-- Productos destacados -->
-    <section id="productos" class="productos" aria-labelledby="titulo-productos">
-      <div class="contenedor">
-        <h2 id="titulo-productos" class="titulo-seccion">Productos destacados</h2>
-        <p class="subtitulo-seccion">Los repuestos y herramientas que más se llevan nuestros clientes esta temporada.</p>
+    <section id="contacto">
+      <h2>Contáctanos</h2>
+      <form action="#" method="post">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre">
 
-        <div class="productos__rejilla">
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" name="correo">
 
-          <article class="producto">
-            <figure><span aria-hidden="true">⚙️</span><figcaption class="sr-only" style="position:absolute;left:-9999px;">Filtro hidráulico</figcaption></figure>
-            <div class="producto__cuerpo">
-              <span class="producto__codigo">Cód. FH-2041-T</span>
-              <h3>Filtro hidráulico para tractor</h3>
-              <p class="producto__compat">Compatible con tractores de 60 a 90 HP.</p>
-              <div class="producto__pie">
-                <p class="precio">$24,90</p>
-                <button type="button" class="boton">Agregar</button>
-              </div>
-            </div>
-          </article>
+        <label for="mensaje">¿Qué pieza necesitas?</label>
+        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
 
-          <article class="producto">
-            <figure class="alt"><span aria-hidden="true">💧</span><figcaption class="sr-only" style="position:absolute;left:-9999px;">Bomba de riego</figcaption></figure>
-            <div class="producto__cuerpo">
-              <span class="producto__codigo">Cód. BR-550-G</span>
-              <h3>Bomba de agua a gasolina 5,5 HP</h3>
-              <p class="producto__compat">Para riego por goteo y aspersión.</p>
-              <span class="producto__etiqueta">Más vendido</span>
-              <div class="producto__pie">
-                <p class="precio">$289,00</p>
-                <button type="button" class="boton">Agregar</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="producto">
-            <figure class="alt2"><span aria-hidden="true">✂️</span><figcaption class="sr-only" style="position:absolute;left:-9999px;">Tijera de podar</figcaption></figure>
-            <div class="producto__cuerpo">
-              <span class="producto__codigo">Cód. TP-210-A</span>
-              <h3>Tijera de podar de acero forjado</h3>
-              <p class="producto__compat">Corte limpio en ramas de hasta 25 mm.</p>
-              <div class="producto__pie">
-                <p class="precio">$18,50 <del>$22,00</del></p>
-                <button type="button" class="boton">Agregar</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="producto">
-            <figure><span aria-hidden="true">🧴</span><figcaption class="sr-only" style="position:absolute;left:-9999px;">Fumigadora</figcaption></figure>
-            <div class="producto__cuerpo">
-              <span class="producto__codigo">Cód. FM-20-E</span>
-              <h3>Fumigadora de espalda 20 litros</h3>
-              <p class="producto__compat">Incluye lanza y 3 boquillas intercambiables.</p>
-              <div class="producto__pie">
-                <p class="precio">$46,00</p>
-                <button type="button" class="boton">Agregar</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="producto">
-            <figure class="alt"><span aria-hidden="true">🌾</span><figcaption class="sr-only" style="position:absolute;left:-9999px;">Cuchilla de cosecha</figcaption></figure>
-            <div class="producto__cuerpo">
-              <span class="producto__codigo">Cód. CM-300-S</span>
-              <h3>Cuchilla para motoguadaña</h3>
-              <p class="producto__compat">Acero templado de 3 puntas, eje de 25,4 mm.</p>
-              <span class="producto__etiqueta">Oferta</span>
-              <div class="producto__pie">
-                <p class="precio">$9,90 <del>$12,50</del></p>
-                <button type="button" class="boton">Agregar</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="producto">
-            <figure class="alt2"><span aria-hidden="true">🔧</span><figcaption class="sr-only" style="position:absolute;left:-9999px;">Juego de llaves</figcaption></figure>
-            <div class="producto__cuerpo">
-              <span class="producto__codigo">Cód. LL-24-M</span>
-              <h3>Juego de llaves mixtas 24 piezas</h3>
-              <p class="producto__compat">Medidas de 6 a 32 mm, con estuche.</p>
-              <div class="producto__pie">
-                <p class="precio">$38,00</p>
-                <button type="button" class="boton">Agregar</button>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Ventajas -->
-    <section id="ventajas" class="ventajas" aria-labelledby="titulo-ventajas">
-      <div class="contenedor">
-        <h2 id="titulo-ventajas" class="titulo-seccion">Por qué comprar con nosotros</h2>
-        <p class="subtitulo-seccion">Sabemos que una máquina parada es dinero perdido. Por eso trabajamos así:</p>
-
-        <div class="ventajas__lista">
-          <article class="ventaja">
-            <h3>Piezas verificadas</h3>
-            <p>Revisamos la compatibilidad de cada repuesto con tu marca y modelo.</p>
-          </article>
-          <article class="ventaja">
-            <h3>Despacho en 48 horas</h3>
-            <p>Enviamos a las zonas rurales con transporte de carga.</p>
-          </article>
-          <article class="ventaja">
-            <h3>Garantía de 6 meses</h3>
-            <p>Si una pieza falla de fábrica, la cambiamos sin costo.</p>
-          </article>
-          <article class="ventaja">
-            <h3>Asesoría técnica</h3>
-            <p>Un técnico te ayuda a identificar la pieza que necesitas.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Oferta -->
-    <section id="oferta" class="oferta" aria-labelledby="titulo-oferta">
-      <div class="contenedor">
-        <div>
-          <h2 id="titulo-oferta">Temporada de siembra: 15% de descuento en riego</h2>
-          <p>Bombas, mangueras, aspersores y accesorios con descuento hasta fin de mes.</p>
-        </div>
-        <a href="#productos" class="boton">Comprar con descuento</a>
-      </div>
-    </section>
-
-    <!-- Contacto -->
-    <section id="contacto" class="contacto" aria-labelledby="titulo-contacto">
-      <div class="contenedor">
-        <div>
-          <h2 id="titulo-contacto" class="titulo-seccion">¿No encuentras tu pieza?</h2>
-          <p class="subtitulo-seccion">Cuéntanos la marca, el modelo y la pieza que buscas. Te respondemos el mismo día.</p>
-
-          <address>
-            <p><strong>Teléfono:</strong> <a href="tel:+59322000000">(02) 200-0000</a></p>
-            <p><strong>Correo:</strong> <a href="mailto:ventas@agrorepuestos.example">ventas@agrorepuestos.example</a></p>
-            <p><strong>Horario:</strong> lunes a sábado, de 8:00 a 18:00</p>
-          </address>
-        </div>
-
-        <form class="formulario" action="#" method="post">
-          <div>
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" required>
-          </div>
-          <div>
-            <label for="correo">Correo electrónico</label>
-            <input type="email" id="correo" name="correo" required>
-          </div>
-          <div>
-            <label for="tipo">Tipo de equipo</label>
-            <select id="tipo" name="tipo">
-              <option>Tractor</option>
-              <option>Bomba de riego</option>
-              <option>Motoguadaña</option>
-              <option>Fumigadora</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div>
-            <label for="mensaje">Marca, modelo y pieza</label>
-            <textarea id="mensaje" name="mensaje"></textarea>
-          </div>
-          <button type="submit" class="boton">Enviar consulta</button>
-        </form>
-      </div>
+        <button type="submit">Enviar</button>
+      </form>
     </section>
 
   </main>
 
-  <!-- PIE DE PÁGINA -->
-  <footer class="pie">
-    <div class="contenedor pie__columnas">
-      <section>
-        <h2>AgroRepuestos</h2>
-        <p>Repuestos y herramientas para el trabajo del campo, con envíos a todo el país.</p>
-      </section>
-
-      <nav aria-label="Tienda">
-        <h3>Tienda</h3>
-        <ul>
-          <li><a href="#categorias">Categorías</a></li>
-          <li><a href="#productos">Productos</a></li>
-          <li><a href="#oferta">Ofertas</a></li>
-        </ul>
-      </nav>
-
-      <nav aria-label="Ayuda">
-        <h3>Ayuda</h3>
-        <ul>
-          <li><a href="#ventajas">Envíos y garantía</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-          <li><a href="#contacto">Preguntas frecuentes</a></li>
-        </ul>
-      </nav>
-
-      <section>
-        <h3>Formas de pago</h3>
-        <ul>
-          <li>Tarjeta de crédito</li>
-          <li>Transferencia bancaria</li>
-          <li>Pago contra entrega</li>
-        </ul>
-      </section>
-    </div>
-
-    <p class="pie__legal">&copy; 2026 AgroRepuestos. Proyecto académico, sitio estático sin JavaScript.</p>
+  <footer>
+    <p>&copy; 2026 AgroRepuestos. Proyecto académico, sitio estático sin JavaScript.</p>
   </footer>
 
 </body>
